@@ -3,31 +3,77 @@
 <head>
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
+<style></style>
 
 <body>
     <div id='root'></div>
-    <script>
+    <script type="text/babel">
 
-        class LikeButton extends React.Component {
+        class Gugudan extends React.Component {
             constructor(props) {
                 super(props);
 
-                this.state = { liked: false };
+                this.state = {
+                    firstNum: Math.ceil(Math.random() * 9),
+                    secondNum: Math.ceil(Math.random() * 9),
+                    input: '',
+                    result: '',
+                    count: 0,
+                };
+            }
+
+            onSubmit = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (parseInt(this.state.input) === this.state.firstNum * this.state.secondNum) {
+                    this.setState({
+                        result: 'CORRECT',
+                        firstNum: Math.ceil(Math.random() * 9),
+                        secondNum: Math.ceil(Math.random() * 9),
+                        input: '',
+                        count: this.state.count + 1,
+                    });
+
+                } else {
+                    this.setState({
+                        result: 'WRONG!',
+                        input: '',
+                    });
+
+
+
+                }
+
             }
             render() {
-                return e('button', { onClick: () => { console.log('클릭함') } }, '❤');  //<button>Like</button>
+                return (
+                    <div>
+                        <h2>Gu gu dan Question</h2>
+                        <form onSubmit={this.onSubmit}>
+                            <div>{this.state.firstNum} X {this.state.secondNum} =
+                                <input type="number" placeholder="answer" value={this.state.input}
+                                    onChange={(e) => this.setState({ input: e.target.value })} /></div>
+
+                            <button onClick={this.onSubmit}>click</button>
+                        </form>
+                        <div>CORRECT COUNT :{this.state.count}</div>
+                        <div className="rs"><b>{this.state.result}</b></div>
+
+                    </div >
+                );
             }
 
 
 
         }
 
-
+// 1-4 중간쯤
     </script>
-    <script>
-        ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+    <script type="text/babel">
+        ReactDOM.render(<Gugudan />, document.querySelector('#root'));
 
     </script>
 </body>
