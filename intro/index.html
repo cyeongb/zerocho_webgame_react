@@ -10,65 +10,77 @@
 <body>
     <div id='root'></div>
     <script type="text/babel">
+        const Gugudan = () => {
+            const [firstNum, setFirstNum] = React.useState(Math.ceil(Math.random() * 9));
+            const [secondNum, setSecondNum] = React.useState(Math.ceil(Math.random() * 9));
+            const [input, setInput] = React.useState('');
+            const [result, setResult] = React.useState('');
+            const [count, setCount] = React.useState(0);
+            const ref = React.useRef(null);
 
-        class Gugudan extends React.Component {
-            constructor(props) {
-                super(props);
-
-                this.state = {
-                    firstNum: Math.ceil(Math.random() * 9),
-                    secondNum: Math.ceil(Math.random() * 9),
-                    input: '',
-                    result: '',
-                    count: 0,
-                };
-            }
-
-            onSubmit = (e) => {
+            const onSubmit = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
-                if (parseInt(this.state.input) === this.state.firstNum * this.state.secondNum) {
-                    this.setState({
-                        result: 'CORRECT',
-                        firstNum: Math.ceil(Math.random() * 9),
-                        secondNum: Math.ceil(Math.random() * 9),
-                        input: '',
-                        count: this.state.count + 1,
-                    });
+                if (parseInt(input) === firstNum * secondNum) {
+                    setResult('ANSWER:' + input);
+                    setFirstNum(Math.ceil(Math.random() * 9));
+                    setSecondNum(Math.ceil(Math.random() * 9));
+                    setInput('');
+                    setCount(count + 1);
+
+                    // this.setState((prevState) => {
+                    //     return {
+                    //         result: 'ANSWER:' + prevState.input,
+                    //         firstNum: Math.ceil(Math.random() * 9),
+                    //         secondNum: Math.ceil(Math.random() * 9),
+                    //         input: '',
+                    //         count: prevState.count + 1,
+
+                    //     }
+                    // });
+                    ref.current.focus();
+
 
                 } else {
-                    this.setState({
-                        result: 'WRONG!',
-                        input: '',
-                    });
+                    setResult('WRONG!');
 
+                    // this.setState(() => {
+                    //     return {
+                    //         result: 'WRONG!',
+                    //         input: '',
+                    //     }
+                    // });
 
+                    ref.current.focus();
 
                 }
 
             }
-            render() {
-                return (
-                    <div>
-                        <h2>Gu gu dan Question</h2>
-                        <form onSubmit={this.onSubmit}>
-                            <div>{this.state.firstNum} X {this.state.secondNum} =
-                                <input type="number" placeholder="answer" value={this.state.input}
-                                    onChange={(e) => this.setState({ input: e.target.value })} /></div>
 
-                            <button onClick={this.onSubmit}>click</button>
-                        </form>
-                        <div>CORRECT COUNT :{this.state.count}</div>
-                        <div className="rs"><b>{this.state.result}</b></div>
-
-                    </div >
-                );
+            const onChange = (e) => {
+                setInput(e.target.value);
+                // this.setState({ input: e.target.value })
             }
 
+            //  input;
+            return (
+                <React.Fragment>
+                    <h2>Gu gu dan Question</h2>
+                    <form onSubmit={onSubmit}>
+                        <div>{firstNum} X {secondNum} =
+                                <input ref={ref} type="number" placeholder="answer" value={input}
+                                onChange={onChange} /></div>
 
+                        <button onClick={onSubmit}>click</button>
+                    </form>
+                    <div>CORRECT COUNT :{count}</div>
+                    <div className="rs"><b>{result}</b></div>
 
+                </React.Fragment>
+            );
         }
+
 
 // 1-4 중간쯤
     </script>
