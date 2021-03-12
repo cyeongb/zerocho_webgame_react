@@ -1,9 +1,14 @@
 const React = require("react");
-const ReactDom = require("react-dom");
 const { Component } = React;
 
 class WordRelay extends Component {
-  render() {}
+  state = {
+    text: "Success Webpack!",
+  };
+  render() {
+    console.log("Success Webpack!");
+    return <h1>{this.state.text}</h1>;
+  }
 }
 
 module.exports = WordRelay;

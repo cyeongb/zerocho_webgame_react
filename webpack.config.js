@@ -12,7 +12,7 @@ module.exports = {
     //입력
 
     //두 jsx파일을 합쳐서 하나의 js 파일로 만들 예정.
-    app: ["./client", " ./WordRelay"],
+    app: ["./client"], // ./WordRelay 파일은 이미 client.jsx안에서 가져옴
   },
 
   module: {
@@ -27,6 +27,10 @@ module.exports = {
             "@babel/preset-env",
             "@babel/preset-react", //preset이름으로 다운받은 것들을 넣어줌
           ],
+          plugins: [
+            "@babel/plugin-syntax-class-properties",
+            "babel-plugin-transform-class-properties",
+          ], //react class형을 쓰기위한 플러그인
         },
       },
     ],
