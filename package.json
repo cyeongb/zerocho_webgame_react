@@ -1,7 +1,6 @@
 {
-  "name": "webgame",
+  "name": "wordrelay",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,5 +29,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0"
-  }
+  },
+  "description": ""
 }
