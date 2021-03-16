@@ -1,5 +1,7 @@
 //const WordRelay = require("./WordRelay");
 const path = require("path");
+const webpack = require("webpack");
+const EncodingPlugin = require("webpack-encoding-plugin");
 
 module.exports = {
   name: "word-relay-set",
@@ -16,7 +18,7 @@ module.exports = {
   },
 
   module: {
-    //modules는 entry파일을 해당 module에 적용한 후에 output으로 내보냄.
+    //=Loaders modules는 entry파일을 해당 module에 적용한 후에 output으로 내보냄.
     rules: [
       {
         //module에 여러개의 규칙을 적용합니다.
@@ -30,7 +32,9 @@ module.exports = {
             [
               "@babel/preset-env", //preset-env : 환경에맞게 맞춰줌
               //--> 자신의 환경에 맞게 지원하는 버전만 해주는것이 좋다. 너무 많이 지원하게되면 바벨이 느려짐
-              { targets: { browsers: ["last 2 chrome versions"] } }, //최근 두 크롬 버전 브라우저만 지원한다.
+              {
+                targets: { browsers: [" > 1% in KR"] },
+              }, //한국에서 점유율 1%이상 브라우저만 지원한다. : browserslist에서 찾아볼수 있음
             ],
             "@babel/preset-react", //preset-react : react를 지원하는 플러그인들
           ],
@@ -42,6 +46,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    // 추가  작업할 프로그램
+    new webpack.LoaderOptionsPlugin({ debug: true }), // 위의 module(loader)의 모든 옵션들의 debug:true로 넣어줌.
+    new EncodingPlugin({ encoding: "utf8" }),
+  ],
   output: {
     //출력
     path: path.join(__dirname, "dist"), //__dirname: 현재폴더
