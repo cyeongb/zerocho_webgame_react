@@ -3,10 +3,10 @@ const { Component } = React;
 
 class WordRelay extends Component {
   state = {
-    word: "감비",
+    word: "감비2",
     value: "",
     result: "",
-    next: this.word + "다음에 올 말은?",
+    next: "이 다음에 올 말은?",
   };
   onSubmitForm = (e) => {
     e.preventDefault();
@@ -43,7 +43,9 @@ class WordRelay extends Component {
           />
           <button>Next!</button>
         </form>
-        <div>{this.state.result}</div>
+        <div>
+          <b>{this.state.result}</b>
+        </div>
       </>
     );
   }
