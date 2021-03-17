@@ -42,8 +42,8 @@ module.exports = {
             "@babel/preset-react", //preset-react : react를 지원하는 플러그인들
           ],
           plugins: [
-            "@babel/plugin-syntax-class-properties",
-            "babel-plugin-transform-class-properties",
+            // "@babel/plugin-syntax-class-properties",
+            // "babel-plugin-transform-class-properties",
             //react class형을 쓰기위한 플러그인
             "react-refresh/babel", //hot reloading
           ],
