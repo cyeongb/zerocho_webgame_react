@@ -1,11 +1,11 @@
 //const WordRelay = require("./WordRelay");
-const path = require("path");
-const webpack = require("webpack");
+import path from "path";
+import webpack from "webpack";
 // const EncodingPlugin = require("webpack-encoding-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
-  name: "word-relay-dev",
+  name: "web-games",
   mode: "development", //production
   devtool: "eval", //:개발용  hidden-source-map : production용
   resolve: {
@@ -42,8 +42,9 @@ module.exports = {
             "@babel/preset-react", //preset-react : react를 지원하는 플러그인들
           ],
           plugins: [
-            // "@babel/plugin-syntax-class-properties",
+              "@babel/plugin-syntax-class-properties",
             // "babel-plugin-transform-class-properties",
+            "@babel/plugin-proposal-class-properties",
             //react class형을 쓰기위한 플러그인
             "react-refresh/babel", //hot reloading
           ],

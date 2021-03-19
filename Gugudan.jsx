@@ -1,5 +1,4 @@
-const React = require("react");
-const { useState, useRef } = React;
+import React, { useState, useRef } from "react";
 
 const Gugudan = () => {
   const [firstNum, setFirstNum] = useState(Math.ceil(Math.random() * 9));
@@ -55,4 +54,4 @@ const Gugudan = () => {
   );
 };
 
-module.exports = Gugudan;
+export default Gugudan;

@@ -1,6 +1,6 @@
 /*
-const React = require("react");
-const { Component } = React;
+import, { Component } React from"react";
+
 
 class WordRelay extends Component {
   state = {
