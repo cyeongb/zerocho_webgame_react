@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, createRef } from "react";
 import Try from "./Try";
 
 function getNumbers() {
@@ -14,12 +14,13 @@ function getNumbers() {
   return array;
 }
 
-class Baseball_clss extends React.Component {
+class Baseball_clss extends Component {
   state = {
     result: "",
     value: "",
     answer: getNumbers(),
     tries: [],
+    count: 0,
   };
 
   onChangeInput = (e) => {
@@ -28,73 +29,93 @@ class Baseball_clss extends React.Component {
   };
 
   onSubmitForm = (e) => {
+    const { value, answer, tries } = this.state;
     e.preventDefault();
 
-    if (this.state.value === this.state.answer.join("")) {
-      this.setState({
-        //게임 성공 시
-        result: "Home Run ⚾",
-        tries: [
-          ...this.state.tries,
-          { try: this.state.value, result: "Home Run !!" },
-        ],
+    if (value === answer.join("")) {
+      this.setState((prevState) => {
+        return {
+          //게임 성공 시
+          result: "Home Run ⚾",
+          tries: [...prevState.tries, { try: value, result: "Home Run ⚾!!" }],
+        };
       }); //push 대신 새로운 배열 만듬
-      confirm("한판 더?");
+
+      alert(`${value} 홈런 ! 한판 더?`);
+
+      this.setState({ value: "", answer: getNumbers(), tries: [] }); //게임 리셋
+      this.inputRef.current.focus();
     } else {
-      const answerArray = this.state.value.split("").map((v) => {
-        parseInt(v);
-      });
+      const answerArray = value.split("").map((v) => parseInt(v));
       let strike = 0;
       let ball = 0;
-      if (this.state.tries.length > 9) {
+      if (tries.length >= 9) {
         //10번 이상 틀리면 -- 게임오버
         this.setState({
           result: `FAIL !  답 : ${answer.join(",")}`,
         });
-        confirm("Continue?");
+        alert("Continue?");
         this.setState({
           value: "",
           answer: getNumbers(),
           tries: [],
         });
+        this.inputRef.current.focus();
       } else {
         // 숫자 입력 시 10번 이내 기회 제공
         for (let i = 0; i < 4; i++) {
-          if (answerArray[i] === this.state.ansert[i]) {
+          if (answerArray[i] === this.state.answer[i]) {
             strike += 1; //위치와 숫자가 맞으면 스트라이크
-          } else if (this.state.answer.includes(answerArray[i])) {
+          } else if (answer.includes(answerArray[i])) {
             ball += 1; // 숫자만 포함되어있으면 볼
           }
         }
-        this.setState({
-          tries: [
-            ...this.state.tries,
-            {
-              try: this.state.value,
-              result: `Strike : ${strike} , Ball : ${ball} `,
-            },
-          ],
-          value: "",
+        this.setState((prevState) => {
+          return {
+            tries: [
+              ...prevState.tries,
+              {
+                try: value,
+                result: `Strike : ${strike} , Ball : ${ball} `,
+              },
+            ],
+            value: "",
+          };
         });
+        this.inputRef.current.focus();
       }
     }
+    this.state.count += 1;
   };
+
+  inputRef = createRef();
+
   render() {
+    const { result, value, tries } = this.state;
+    let cnt = 1;
     return (
       <>
-        <h1>결과 : {this.state.result}</h1>
+        <h1>결과 : {result}</h1>
         <form onSubmit={this.onSubmitForm}>
           <input
+            ref={this.inputRef}
             maxLength={4}
-            value={this.state.value}
+            value={value}
             onChange={this.onChangeInput}
           />
         </form>
-        <div>TRY :{this.state.tries.length}</div>
+        <div>TRY :{tries.length}</div>
+        <p>
+          {" "}
+          10번 넘게 시도하면 실패입니다.
+          <br />
+          {10 - this.state.count}번 남았습니다
+        </p>
         <ul>
-          {this.state.tries.map((v, i) => {
+          {tries.map((v, i) => {
             //key 값에는 index값을 사용하는걸 지양함. key를 기준으로 데이터가 수정,삭제되기때문에 문제가 생긴다고 함
-            return <Try key={`${i + 1}차 시도`} tryInfo={v} />;
+            return <Try key={i} tryInfo={v} />;
+            cnt++;
           })}
         </ul>
       </>

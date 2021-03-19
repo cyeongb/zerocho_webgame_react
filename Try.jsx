@@ -4,6 +4,9 @@ import React from "react";
 class Try extends React.Component {
   render() {
     const { tryInfo } = this.props;
+
+    console.log(tryInfo);
+
     return (
       <div>
         <li>
