@@ -1,4 +1,5 @@
-import React, { Component, createRef } from "react";
+import React, { PureComponent, createRef } from "react";
+//PureComponent : shouldComponentUpdate기능을 구현한 컴포넌트로, 바뀐 컴포넌트만 업데이트 함 하지만 객체나 배열판단은 어려움
 import Try from "./Try";
 
 function getNumbers() {
@@ -14,7 +15,7 @@ function getNumbers() {
   return array;
 }
 
-class Baseball_clss extends Component {
+class Baseball_clss extends PureComponent {
   state = {
     result: "",
     value: "",
@@ -92,7 +93,7 @@ class Baseball_clss extends Component {
 
   render() {
     const { result, value, tries } = this.state;
-    let cnt = 1;
+
     return (
       <>
         <h1>결과 : {result}</h1>
@@ -111,13 +112,12 @@ class Baseball_clss extends Component {
           <br />
           {10 - this.state.count}번 남았습니다
         </p>
-        <ul>
+        <ol type="1">
           {tries.map((v, i) => {
             //key 값에는 index값을 사용하는걸 지양함. key를 기준으로 데이터가 수정,삭제되기때문에 문제가 생긴다고 함
             return <Try key={i} tryInfo={v} />;
-            cnt++;
           })}
-        </ul>
+        </ol>
       </>
     );
   }
