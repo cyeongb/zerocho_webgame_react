@@ -47,6 +47,7 @@ module.exports = {
             "@babel/plugin-proposal-class-properties",
             //react class형을 쓰기위한 플러그인
             "react-refresh/babel", //hot reloading
+            ,"styled-components"
           ],
         },
         exclude: path.join(__dirname, "node_modules"),

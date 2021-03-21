@@ -1,4 +1,4 @@
-.screen{
+#screen{
     width:300px;
     height:200px;
     text-align: center;
@@ -6,15 +6,15 @@
 
 }
 
-.screen.waiting{
+#screen.waiting{
     background-color: aquamarine;
 }
 
-.screen.ready{
+#screen.ready{
     background-color:yellowgreen;
     color:brown;
 }
 
-.screen.now{
+#screen.now{
     background-color:palevioletred;
 }

@@ -1,5 +1,24 @@
 import React, { Component } from "react";
-import style from "./response.css";
+import "./response.css";
+//import styled from "styled-components";
+
+// styled.div`
+//   width: 300px;
+//   height: 200px;
+//   text-align: center;
+//   user-select: none;
+//   .waiting{
+//     background-color: aquamarine;
+//     }
+//     .ready{
+//     background-color:yellowgreen;
+//     color:brown;
+//     }
+//     .now{
+//     background-color:palevioletred;
+// }
+// `;
+
 class Response_clss extends Component {
   state = {
     state: "waiting",
@@ -62,7 +81,7 @@ class Response_clss extends Component {
     const { state, message } = this.state;
     return (
       <>
-        <div id={style.screen} className={state} onclick={this.onClickScreen}>
+        <div id="screen" className={state} onclick={this.onClickScreen} >
           {message}
         </div>
         <div>
