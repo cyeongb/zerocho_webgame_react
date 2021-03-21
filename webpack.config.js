@@ -1,6 +1,6 @@
 //const WordRelay = require("./WordRelay");
 const path = require("path");
-const webpack= require("webpack");
+const webpack = require("webpack");
 // const EncodingPlugin = require("webpack-encoding-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
