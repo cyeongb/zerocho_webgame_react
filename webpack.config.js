@@ -66,11 +66,11 @@ module.exports = {
     path: path.join(__dirname, "dist"), //__dirname: 현재폴더
     // path.join하면 현재 폴더를 중심으로 경로를 잡아준다.
     filename: "app.js", //원하는 파일 명
-    publicPath: "/dist",
+    publicPath: "/dist/",
   },
 
   devServer: {
-    publicPath: "/dist", //해당 경로에 dev server 작동 후 결과를 저장한다.
+    publicPath: "/dist/", //해당 경로에 dev server 작동 후 결과를 저장한다.
     hot: true, //hot reloading
     //dev server가 hot reloading 이라고해서 변경점을 감지할 수 있다. 그래서 변경한것에 따라서 해당 경로의 소스를 수정해줌.
   },

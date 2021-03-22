@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 
-import Gugudan from "./gugudan/Gugudan";
-
-import Baseball_clss from "./baseball/Baseball_clss";
-import Baseball_func from "./baseball/Baseball_func";
-import Response_clss from "./response/Response_clss";
-
-ReactDom.render(<Baseball_func />, document.querySelector("#root"));
+//import Response_func from "./Response_func.jsx";
+import rsp_clss from "./rsp/rsp_clss.jsx";
+const Hot = hot(rsp_clss);
+ReactDom.render(<Hot />, document.querySelector("#root"));
