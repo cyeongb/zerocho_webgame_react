@@ -47,7 +47,8 @@ module.exports = {
             "@babel/plugin-proposal-class-properties",
             //react class형을 쓰기위한 플러그인
             "react-refresh/babel", //hot reloading
-            ,"styled-components"
+            ,
+            "styled-components",
           ],
         },
         exclude: path.join(__dirname, "node_modules"),
@@ -56,7 +57,7 @@ module.exports = {
   },
   plugins: [
     // 추가  작업할 프로그램
-    // new webpack.LoaderOptionsPlugin({ debug: true }), // 위의 module(loader)의 모든 옵션들의 debug:true로 넣어줌.
+    new webpack.LoaderOptionsPlugin({ debug: true }), // 위의 module(loader)의 모든 옵션들의 debug:true로 넣어줌.
     //  new EncodingPlugin({ encoding: "utf8" }),
     new ReactRefreshWebpackPlugin(),
   ],

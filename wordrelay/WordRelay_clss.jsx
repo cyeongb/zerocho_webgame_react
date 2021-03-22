@@ -1,6 +1,4 @@
-/*
-import, { Component } React from"react";
-
+import React, { Component } from "react";
 
 class WordRelay extends Component {
   state = {
@@ -53,5 +51,3 @@ class WordRelay extends Component {
 }
 
 module.exports = WordRelay;
-
-*/

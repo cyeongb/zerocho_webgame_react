@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./response.css";
+//import "./response.css";
 //import styled from "styled-components";
 
 // styled.div`
@@ -30,7 +30,7 @@ class Response_clss extends Component {
   startTime;
   endTime;
 
-  onClickScreen = (e) => {
+  onClickScreen = () => {
     const { state } = this.state;
 
     if (state === "waiting") {
@@ -72,8 +72,8 @@ class Response_clss extends Component {
     const { result } = this.state;
     return result.length === 0 ? null : (
       <>
-        <div>평균시간 : {result.reduce((a, c) => a + c / result.length)}</div>
-        <button onclick={onReset}>RESET</button>
+        <div>평균시간 : {result.reduce((a, c) => a + c / result.length)}ms</div>
+        <button onClick={onReset}>RESET</button>
       </>
     );
   };
@@ -81,13 +81,10 @@ class Response_clss extends Component {
     const { state, message } = this.state;
     return (
       <>
-        <div id="screen" className={state} onclick={this.onClickScreen} >
+        <div id="screen" className={state} onclick={this.onClickScreen}>
           {message}
         </div>
-        <div>
-          평균 걸린 시간 :{this.renderAverage()}
-          ms
-        </div>
+        <div>{this.renderAverage()}</div>
       </>
     );
   }
