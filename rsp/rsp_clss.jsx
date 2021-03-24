@@ -34,7 +34,7 @@ class rsp_clss extends Component {
     // 리렌더링이 일어나면 실행되지 않습니다.
     // 여기에 비동기 요청을 많이 합니다.
     console.log("componentDidMount()");
-    this.interval = setInterval(this.changeHand, 1000);
+    this.interval = setInterval(this.changeHand, 400);
     //setInterval은 일정 시간마다 반복작업을 해 줍니다.
   }
 
@@ -63,6 +63,7 @@ class rsp_clss extends Component {
   };
 
   onClickBtn = (choice) => () => {
+    // high oreder function :onClick 이벤트에 쓰이는 ()=> 를 컴포넌트에 붙여 쓸수 있습니다.
     const { coord } = this.state;
 
     clearInterval(this.interval); //클릭하면 멈춰서 누가 이겼는지 눈으로 확인하기 위함입니다.
@@ -87,8 +88,9 @@ class rsp_clss extends Component {
       });
     }
     setTimeout(() => {
-      this.interval = setInterval(this.changeHand, 100);
-    }, 1000);
+      //결과 확인하는 시간
+      this.interval = setInterval(this.changeHand, 100); //대결 후 잠깐 멈춰지고 다시 움직이게합니다.
+    }, 1200);
   };
 
   render() {
@@ -102,24 +104,20 @@ class rsp_clss extends Component {
           }}
         />
         <div>
-          <button
-            id="rock"
-            className="btn_r"
-            onClick={() => onClickBtn("rock")}
-          >
+          <button id="rock" className="btn_r" onClick={this.onClickBtn("rock")}>
             바위
           </button>
           <button
             id="scissor"
             className="btn_s"
-            onClick={() => onClickBtn("scissor")}
+            onClick={this.onClickBtn("scissor")}
           >
             가위
           </button>
           <button
             id="paper"
             className="btn_p"
-            onClick={() => onClickBtn("paper")}
+            onClick={this.onClickBtn("paper")}
           >
             보
           </button>
