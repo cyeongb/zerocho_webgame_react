@@ -34,7 +34,8 @@ class rsp_clss extends Component {
     // 리렌더링이 일어나면 실행되지 않습니다.
     // 여기에 비동기 요청을 많이 합니다.
     console.log("componentDidMount()");
-    this.interval = setInterval(this.changeHand, 100);
+    this.interval = setInterval(this.changeHand, 1000);
+    //setInterval은 일정 시간마다 반복작업을 해 줍니다.
   }
 
   componentDidUpdate() {
@@ -46,6 +47,7 @@ class rsp_clss extends Component {
     //컴포넌트가 제거되기 직전,(부모 컴포넌트가 자식 컴포넌트를 제거할때) 비동기처리 요청정리를 많이 합니다.
     console.log("componentWillUnmount()");
     clearInterval(this.interval);
+    // clearing을 안해주면 계속 돌아가서 메모리 부하가 됩니다.
   }
 
   changeHand = () => {
@@ -63,7 +65,7 @@ class rsp_clss extends Component {
   onClickBtn = (choice) => () => {
     const { coord } = this.state;
 
-    clearInterval(this.interval);
+    clearInterval(this.interval); //클릭하면 멈춰서 누가 이겼는지 눈으로 확인하기 위함입니다.
     const myScore = scores[choice];
     const cpuScore = scores[computerChoice(coord)];
     const diff = myScore - cpuScore;
@@ -73,7 +75,7 @@ class rsp_clss extends Component {
       this.setState((prevState) => {
         return {
           result: "이겼다!",
-          score: prevState.score + 10,
+          score: prevState.score + 10, //이기면 옛날 점수에 10점을 더해줍니다.
         };
       });
     } else {

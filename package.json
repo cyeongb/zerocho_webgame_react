@@ -31,7 +31,7 @@
     "babel-loader": "^8.2.2",
     "encoding-plugin": "^2.0.2",
     "react-refresh": "^0.9.0",
-    "webpack": "^5.27.1",
+    "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   }
