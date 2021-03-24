@@ -17,7 +17,7 @@ const computerChoice = (coord) => {
   })[0];
 };
 
-class rsp_clss extends Component {
+class Rsp_clss extends Component {
   // 클래스의 경우 -> constructor -> render -> ref -> componentDidMount
   // (setState/props 바뀔때) -> shouldComponentUpdate(true) -> render -> componentDidUpdate
   // 부모가 나를 없앴을 때 -> componentWillUnmount -> 소멸
@@ -129,4 +129,4 @@ class rsp_clss extends Component {
   }
 }
 
-export default rsp_clss;
+export default Rsp_clss;

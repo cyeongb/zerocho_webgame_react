@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 
-const rsp_func = () => {
+const Rsp_func = memo(() => {
+  //불필요한 렌더링을 막기위한 memo
   const rspCoords = {
     rock: "0",
     scissor: "-142px",
@@ -93,6 +94,6 @@ const rsp_func = () => {
       <div>SCORE:{score}</div>
     </>
   );
-};
+});
 
-export default rsp_func;
+export default Rsp_func;
