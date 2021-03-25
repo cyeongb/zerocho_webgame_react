@@ -33,7 +33,7 @@ const Lotto_func = () => {
   const timeouts = useRef([]); //useRef는 일반 값(파라미터)을 기억합니다.
 
   const onClickRedo = useCallback(() => {
-    //useCallback은 함수를 기억해 둡니다.
+    //useCallback은 함수를 기억해 둡니다. 자식컴포넌트에 함수로 넘길때에는 필수로 적용해야합니다.
     //클릭시 처음 state로 초기화.
     console.log("onClickRedo()");
     setLottoNums(getNumbers());
