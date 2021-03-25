@@ -34,7 +34,7 @@ module.exports = {
               "@babel/preset-env", //preset-env : 환경에맞게 맞춰줌
               //--> 자신의 환경에 맞게 지원하는 버전만 해주는것이 좋다. 너무 많이 지원하게되면 바벨이 느려짐
               {
-                targets: { browsers: [" > 1% in KR"] },
+                targets: { browsers: [" > 5% in KR"] },
                 //한국에서 점유율 1%이상 브라우저만 지원한다. : browserslist에서 찾아볼수 있음
                 debug: true,
               },

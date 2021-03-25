@@ -1,5 +1,5 @@
 import React, { useCallback, memo } from "react";
-import { CLICK_CELL } from "./Tictacto_clss";
+import { CLICK_CELL } from "./Tictactoe";
 const Td = memo(({ rowIndex, cellIndex, dispatch, cellData }) => {
   console.log("Td class rendering");
 
