@@ -60,8 +60,11 @@ class Lotto_clss extends Component {
   }
 
   componentDidUpdate(pevProps, prevState) {
+    //setState할때마다 실행됩니다.
     console.log("componentDidUpdate()");
     if (this.state.lottoNumber.length === 0) {
+      //lottoNumber배열에 아무 숫자도 안담겨있는경우에 실행합니다
+      // onClickRedo를 눌렀을때 실행됩니다.
       this.runTimeouts();
     }
     if (prevState.lottoNums !== this.state.lottoNums) {
@@ -71,7 +74,6 @@ class Lotto_clss extends Component {
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnMount()");
     this.timeouts.forEach((v) => {
       clearTimeout(v);
       //setTimeout은 잘못되면 메모리 문제가 생길수 있기때문에 컴포넌트가 없어지는 과정에서 clear를 해주어야합니다.
