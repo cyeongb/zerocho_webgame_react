@@ -17,6 +17,8 @@ const initialState = {
   recentCell: [-1, -1],
 };
 
+//action이름은 상수로 밖에 빼놓는것이 좋습니다.
+// export를 붙여서 모듈로 만듭니다.
 export const SET_WINNER = "SET_WINNER";
 export const CLICK_CELL = "CLICK_CELL";
 export const CHANGE_TURN = "CHANGE_TURN";
@@ -28,15 +30,15 @@ const reducer = (state, action) => {
   switch (action.type) {
     case SET_WINNER:
       return {
-        ...state, //state값 복사해서 새로운 state객체 만듬
+        ...state, //state값 복사해서 새로운 state객체 만듬(불변성 유지 ! )
         winner: action.winner, //그리고 바뀌는 부분만 바꾼다
         //state.winner = action.winner 이렇게 객체에 직접 대입은ㄴㄴ x
       };
 
     case CLICK_CELL: {
-      const tableData = [...state.tableData];
+      const tableData = [...state.tableData]; //tableData에 데이터를 넣기 위해서 얕은복사를 먼저 해줍니다
       tableData[action.row] = [...tableData[action.row]]; //immer라는 라이브러리로 가독성 해결할 수 있습니다.
-      tableData[action.row][action.cell] = state.turn;
+      tableData[action.row][action.cell] = state.turn; //현재 턴
       return {
         ...state,
         tableData,
@@ -47,7 +49,7 @@ const reducer = (state, action) => {
     case CHANGE_TURN: {
       return {
         ...state,
-        turn: state.turn === "O" ? "X" : "O",
+        turn: state.turn === "O" ? "X" : "O", //기존 턴이 O면 X로바꿈 아니면 O로,
       };
     }
 
@@ -78,14 +80,47 @@ const Tictactoe = () => {
   const onClickTable = useCallback(() => {
     // 컴포넌트에 넣는 함수들은 다 useCallback을 사용합니다.
     dispatch({ type: SET_WINNER, winner: "O" }); //dispatch안에 들어가는것들은 action 객체입니다.
+    //dispatch는 비동기이기때문에 현재 state값을 확인해보면 바뀌기 전의 state값을 확인할수 있습니다.(state값이 비동기적으로 작용)
     //이게 실행되면 action객체들을 전달해주는데, 이 action객체가 dispatch될때마다 reducer함수가 실행됩니다.
   }, []);
 
-  useEffect(() => {});
+  //비동기인 state를 처리할때는 useEffect를 사용합니다.
+  useEffect(() => {
+    let win = false;
+    //이기는 8가지의 경우를 체크합니다
+    if (
+      tableData[row][0] === turn &&
+      tableData[row][1] === turn &&
+      tableData[row][2] === turn
+    ) {
+      win = true;
+    }
+    if (
+      tableData[0][cell] === turn &&
+      tableData[1][cell] === turn &&
+      tableData[2][cell] === turn
+    ) {
+      win = true;
+    }
+    if (
+      tableData[0][0] === turn &&
+      tableData[1][1] === turn &&
+      tableData[2][2] === turn
+    ) {
+      win = true;
+    }
+    if (
+      tableData[0][2] === turn &&
+      tableData[1][1] === turn &&
+      tableData[2][0] === turn
+    ) {
+      win = true;
+    }
+  }, [tableData]);
   return (
     <>
-      <Table onClick={onClickTable} />
-      {state.winner && <div>{state.winner}님의 승리</div>}
+      <Table onClick={onClickTable} tableData={tableData} />
+      {winner && <div>{winner}님의 승리</div>}
     </>
   );
 };

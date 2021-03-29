@@ -4,7 +4,7 @@ const Table = ({ tableData, dispatch }) => {
   return (
     <table>
       <tbody>
-        {Array(tableData.length)
+        {Array(tableData.length) //Array(tableData.length).fill() => 길이가 3인 배열을 만듭니다.
           .fill()
           .map((tr, i) => {
             <Tr
