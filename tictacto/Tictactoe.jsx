@@ -53,7 +53,7 @@ const reducer = (state, action) => {
       };
     }
 
-    case CHANGERESET_GAME: {
+    case RESET_GAME: {
       return {
         ...state,
         turn: "O",
@@ -127,17 +127,26 @@ const Tictactoe = () => {
     console.log("win >" + win + "tableData >" + tableData);
     if (win) {
       dispatch({ type: SET_WINNER, winner: turn });
+      dispatch({ type: RESET_GAME });
       //현재 turn인 사람이 winner
     } else {
       let all = true;
-      //클릭해서 이긴게 아니면 턴이 바뀝니다
-      dispatch({ type: CHANGE_TURN }); //dispatch될때마다 턴이 바뀝니다
+
       // 무승부검사 : 테이블이 다 찼는지
       tableData.forEach((cell) => {
         if (!cell) {
+          //일단 칸이 다 차있다고 설정해놓고, tableData의 모든 칸을 검사해서 하나라도 비었으면 all을 false로 변경
           all = false;
         }
       });
+
+      if (all) {
+        //모든 칸이 다 찼을경우 게임 리셋
+        dispatch({ type: RESET_GAME });
+      } else {
+        //클릭해서 이긴게 아니면 턴이 바뀝니다
+        dispatch({ type: CHANGE_TURN }); //dispatch될때마다 턴이 바뀝니다
+      }
     }
   }, [tableData]);
   return (
