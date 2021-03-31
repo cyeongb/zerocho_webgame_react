@@ -14,7 +14,7 @@ const initialState = {
     ["", "", ""],
     ["", "", ""],
   ],
-  recentCell: [-1, -1],
+  recentCell: [-1, -1], //recentCell 초기값으로 없는 칸으로 설정
 };
 
 //action이름은 상수로 밖에 빼놓는것이 좋습니다.
@@ -42,7 +42,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         tableData,
-        recentCell: [action.row, action.cell],
+        recentCell: [action.row, action.cell], // 현재 클릭한 cell의 데이터 기억하기
       };
     }
 
@@ -87,8 +87,14 @@ const Tictactoe = () => {
   //비동기인 state를 처리할때는 useEffect를 사용합니다.
   useEffect(() => {
     let win = false;
+    const [row, cell] = recentCell;
+    if (row < 0) {
+      // row가 마이너스이면 실행 x
+      return;
+    }
     //이기는 8가지의 경우를 체크합니다
     if (
+      // 가로줄 검사
       tableData[row][0] === turn &&
       tableData[row][1] === turn &&
       tableData[row][2] === turn
@@ -96,6 +102,7 @@ const Tictactoe = () => {
       win = true;
     }
     if (
+      // 새로줄 검사
       tableData[0][cell] === turn &&
       tableData[1][cell] === turn &&
       tableData[2][cell] === turn
@@ -103,6 +110,7 @@ const Tictactoe = () => {
       win = true;
     }
     if (
+      //대각선
       tableData[0][0] === turn &&
       tableData[1][1] === turn &&
       tableData[2][2] === turn
@@ -115,6 +123,21 @@ const Tictactoe = () => {
       tableData[2][0] === turn
     ) {
       win = true;
+    }
+    console.log("win >" + win + "tableData >" + tableData);
+    if (win) {
+      dispatch({ type: SET_WINNER, winner: turn });
+      //현재 turn인 사람이 winner
+    } else {
+      let all = true;
+      //클릭해서 이긴게 아니면 턴이 바뀝니다
+      dispatch({ type: CHANGE_TURN }); //dispatch될때마다 턴이 바뀝니다
+      // 무승부검사 : 테이블이 다 찼는지
+      tableData.forEach((cell) => {
+        if (!cell) {
+          all = false;
+        }
+      });
     }
   }, [tableData]);
   return (

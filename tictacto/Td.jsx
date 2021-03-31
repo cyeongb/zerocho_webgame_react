@@ -12,7 +12,7 @@ const Td = memo(({ rowIndex, cellIndex, dispatch, cellData }) => {
     }
 
     dispatch({ type: CLICK_CELL, row: rowIndex, cell: cellIndex });
-    dispatch({ type: CHANGE_TURN }); //dispatch될때마다 턴이 바뀝니다
+  
     //몇번째줄(row), 몇번째 칸(cell)을 클릭했는지에 대한 action을 만들어서 reducer에 전달합니다.
   }, [cellData]);
   return <td onClick={onClickTd}>{cellData}</td>;
