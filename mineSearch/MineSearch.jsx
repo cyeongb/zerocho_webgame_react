@@ -13,7 +13,7 @@ export const CODE = {
   OPENED: 0, // 0이상이면 다  OPENED
 };
 
-export const tableContext = createContext({
+export const TableContext = createContext({
   //createContext()는 함수.
   // tableContext에 default value를 넣어줄수 있습니다.
   // 초기값은 별 의미없으니 모양만 맞춤
