@@ -66,6 +66,7 @@ const plantMine = (hor, ver, mine) => {
 };
 
 export const START_GAME = "START_GAME";
+export const OPEN_CELL = "OPEN_CELL";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -75,6 +76,17 @@ const reducer = (state, action) => {
         // 지뢰심는 함수 plantMine
         tableData: plantMine(action.ver, action.hor, action.mine),
       };
+
+    case OPEN_CELL: {
+      const tableData = [...state.tableData]; //불변성을 유지하기위해 복사한 객체
+      tableData[action.ver] = [...state.tableData[action.ver]];
+      tableData[action.ver][action.hor] = CODE.OPENED; //클릭한 칸이 OPENED로 바뀜
+
+      return {
+        ...state,
+        tableData,
+      };
+    }
     default:
       return state;
   }
